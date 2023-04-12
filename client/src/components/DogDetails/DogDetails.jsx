@@ -25,13 +25,13 @@ export default function DogDetails() {
         weightDog = details[0].weight;
         lifeSpanDog = details[0].life_span;
 
-        if (details[0].temperaments[0]) {
-            temperamentDog = [...details[0].temperaments]
-        }
+        // if (details[0].temperaments[0]) {
+            // temperamentDog = [...details[0].temperaments]
+        // }
 
-        if (details[0].temperaments[0].name) {
-            temperamentDog = details[0].temperaments.map(temp => temp.name)
-        }
+        // if (details[0].temperaments[0].name) {
+        //     temperamentDog = details[0].temperaments.map(temp => temp.name)
+        // }
     };
 
     
