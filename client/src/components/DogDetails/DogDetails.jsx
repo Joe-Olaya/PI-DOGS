@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { showDogDetails } from "../../redux/actions";
+import { showDogDetails, cleanDetail } from "../../redux/actions";
 import { Link } from "react-router-dom";
 import style from "../DogDetails/DogDetails.module.css";
 
@@ -11,6 +11,8 @@ export default function DogDetails() {
     
     useEffect(() => {
         dispatch(showDogDetails(id));
+        return () => {dispatch(cleanDetail())
+        }
     }, [dispatch, id]);
     
     const details = useSelector((state) => state.details)

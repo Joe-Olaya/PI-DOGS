@@ -65,9 +65,11 @@ const getAllDogs = async () => {
                 },
             }
         })
+    // getDbData = getDbData.map(e => {
+    //     e.temperaments
+    // })
     const getApiData = (await axios.get('https://api.thedogapi.com/v1/breeds')).data;
     const mappedApiData = cleanData(getApiData);
-    console.log(getDbData);
     return [...getDbData,...mappedApiData];
 };
 

@@ -16,6 +16,11 @@ const intialState = {
 
 const rootReducer = (state = intialState, action) => {
   switch (action.type) {
+    case "CLEAN_DETAIL":
+      return  {
+        ...state,
+        details:[]
+      };
     case "GET_ALL_DOGS":
       action.payload.forEach(element => {
         if (!element.temperaments[0]) {

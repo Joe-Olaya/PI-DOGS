@@ -2,14 +2,24 @@ import axios from "axios";
 
 export function getAllDogs() {
     return async function (dispatch) {
-        var json = await axios.get(`/dogs`, { 
-        });
-        return dispatch({
-            type: "GET_ALL_DOGS",
-            payload: json.data
-        });
+        try {
+            var json = await axios.get(`/dogs`, { 
+            });
+            return dispatch({
+                type: "GET_ALL_DOGS",
+                payload: json.data
+            });
+        } catch (error) {
+            console.log(error);
+        }
     }
 };
+
+export function cleanDetail(){
+    return {
+        type:"CLEAN_DETAIL"
+    }
+}
 
 export function getTemperaments() {
   return async function (dispatch) {
