@@ -110,8 +110,8 @@ const rootReducer = (state = intialState, action) => {
       };
     case "SHOW_DOG_DETAILS":
       let myDetails = action.payload
-      if (!myDetails[0].temperaments[0]) { //agregamos "no-temperaments" a arreglos sin elementos dentro
-        myDetails[0].temperaments[0] = "no-temperaments"
+      if (!myDetails.temperament) { //agregamos "no-temperaments" a arreglos sin elementos dentro
+        myDetails.temperament = "no-temperaments"
       }
       return {
         ...state,

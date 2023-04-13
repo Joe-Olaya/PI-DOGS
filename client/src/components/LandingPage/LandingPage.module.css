@@ -1,9 +1,21 @@
 .main_container{
     background-image: url("./images/bestFriend-img4.jpg");
     height: 100vh;
+    width: 100%;
     background-repeat: no-repeat;
     background-size: cover;    
     background-position-y: center;
+    position: absolute;
+    
+}
+.main_container::after{
+    content: "";
+    position:absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
     
 }
 
@@ -13,19 +25,15 @@
     position: relative;
 }
 
-.main_left_container h1{
+.titleApp{
+    position: relative;
     color: white;
-    text-shadow: 0 0 2px #25b687;
+    text-shadow: 0 0 2px rgb(252, 212, 63);
     font-size: 4rem;
     margin-bottom: 5%;
+    z-index: 10;
 }
 
-.main_left_container h3{
-    color: white;
-    text-shadow: 0 0 2px #25b687;
-    font-size: 1.4rem;
-    margin-bottom: 4%;
-}
 
 .main_left_container .left_paragraph{
   align-items: center;
@@ -36,8 +44,9 @@
 
 .left_paragraph p{
     color: white;
-    text-shadow: 0 0 1px #25b687;
+    text-shadow: 0 0 1px rgb(252, 212, 63);
     font-size: 1.1rem;
     width: 23rem;
-    text-align:left
+    text-align:left;
+    z-index: 10;
 }

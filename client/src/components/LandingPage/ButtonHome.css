@@ -16,12 +16,12 @@ button{
     transition: color 0.5s linear;
     z-index: 100;
     border: 0.1rem solid white;
-    outline: 0.1rem solid #25b687;
-    text-shadow: 0 0 3px #25b687;
+    outline: 0.1rem solid rgb(252, 212, 63);
+    text-shadow: 0 0 3px rgb(252, 212, 63);
 }
 
 .button_home:hover{
-    color: #25b687;
+    color: rgb(252, 212, 63);
 }
 
 .button_home::before,

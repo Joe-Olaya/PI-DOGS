@@ -13,7 +13,7 @@ button{
 
 .logo{
     float: left;
-    color: white;
+    color: rgb(255, 255, 255);
     height: 100%;
     width: 125px;
     margin: 0.3rem 0;
@@ -42,7 +42,7 @@ button{
     padding: 0.5rem 0.9rem;
     border: none;
     box-shadow: 5px 5px 5px 0.5px rgba(0,0,0,0.4);
-    background-color: #25b687;
+    background-color: rgb(252, 212, 63);
     color: white;
 
     cursor: pointer;
@@ -70,15 +70,15 @@ button{
     padding: 0.6rem 0.6rem;
     transition: color 0.5s linear;
     z-index: 100;
-    border: 0.1rem solid #25b687;
-    outline: 0.1rem solid #25b687;
-    text-shadow: 0 0 3px #25b687;
-    background: #25b687;
+    border: 0.1rem solid rgb(252, 212, 63);
+    outline: 0.1rem solid rgb(252, 212, 63);
+    text-shadow: 0 0 3px rgb(252, 212, 63);
+    background: rgb(252, 212, 63);
 
     box-shadow: 5px 3px 5px 0.5px rgba(0,0,0,0.6);
 }
 
-.button_add_dog:hover{ color: #25b687; }
+.button_add_dog:hover{ color: rgb(252, 212, 63); }
 
 .button_add_dog::before,
 .button_add_dog::after{
@@ -115,7 +115,7 @@ button{
 }
 
 .container_card{ /* estilos de carta individual */
-    background-color: #25b687;
+    background-color: rgb(252, 212, 63);
     width: 92.5%;
     border-radius: 15px;
     overflow: hidden;

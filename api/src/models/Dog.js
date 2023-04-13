@@ -27,6 +27,10 @@ module.exports = (sequelize) => {
     life_years:{
       type: DataTypes.STRING,
       allowNull: true
+    },
+    created:{
+      type: DataTypes.BOOLEAN,
+      defaultValue: true
     }
   });
 };

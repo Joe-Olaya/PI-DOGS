@@ -64,7 +64,7 @@ function Home() {
         <div className={`${style.header_container_left}`}>
 
           <Link to="/">
-            <div className={`${style.logo}`}>Dogpedia</div> {/* logo del home */}
+            <div className={`${style.logo}`}>Caninofilos</div> 
           </Link>
           
           <div className={`${style.header_left}`}>
@@ -114,12 +114,15 @@ function Home() {
 
     <div className={style.main_container}>
       <div className={style.container_cards}>
-        {currentDogs?.map((el) => {//validacion que existan los datos
+        {currentDogs?.map((dog) => {//validacion que existan los datos
           return(
-            <div className={`${style.container_card}`} key={el.id}>
-              <Link to={"/dog-detail/"+el.id}>
+            <div className={`${style.container_card}`} key={dog.id}>
+              <Link to={"/dog-detail/"+dog.id}>
                 {
-                  <Card key={el.id} image={el.image} name={el.name} temperaments={el.temperaments[0].name ? el.temperaments.map(el => el.name) : el.temperaments}/>
+                  <Card key={dog.id}
+                  image={dog.image}
+                  name={dog.name} 
+                  temperaments={dog.temperaments[0].name ? dog.temperaments.map(el => el.name) : dog.temperaments}/>
                   //si temperaments viene en un formato distinto desde la BD
                 }
               </Link>

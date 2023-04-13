@@ -1,9 +1,6 @@
 import "./App.css";
 import { Route, Switch, BrowserRouter } from "react-router-dom";
-import LandingPage from "./components/LandingPage/LandingPage";
-import Home from "./components/Home/Home"
-import DogDetails from "./components/DogDetails/DogDetails";
-import FormAddDog from "./components/FormAddDog/FormAddDog";
+import {LandingPage, Home, DogDetails, FormAddDog} from "./components"
 
 function App() {
   return (

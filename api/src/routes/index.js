@@ -21,7 +21,7 @@ const validate = (req,res,next) => {
 router.get("/dogs", getDogsHandler);
 router.get("/dogs/:idRaza", getDogHandler);
 router.get("/temperament", getTemperamentsHandler);
-router.post("/dog", validate, postNewDog);
+router.post("/dogs", validate, postNewDog);
 
 router.use(express.json());
 

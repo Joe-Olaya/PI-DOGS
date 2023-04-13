@@ -2,9 +2,23 @@ const { Dog, Temperament } = require('../db');
 const axios = require('axios');
 
 const getDogsById = async (id, source) => {
-    const dog = source === "api" ?
-    (await axios.get(`https://api.thedogapi.com/v1/breeds/${id}`)).data : await Dog.findByPk(id);
-    return dog
+    if (source === "api"){
+        const dog = (await axios.get(`https://api.thedogapi.com/v1/breeds/${id}`)).data;
+
+        const orderDog = {
+            id: dog.id,
+            name: dog.name,
+            life_span: dog.life_span,
+            height : dog.height.metric,
+            weight : dog.weight.metric,
+            temperament :dog.temperament.split(','),
+            image: `https://cdn2.thedogapi.com/images/${dog.reference_image_id}.jpg`
+        }
+
+        return orderDog
+    } else {
+        return await Dog.findByPk(id)
+    }
 }
 
 const cleanData = (arr) => {
@@ -33,6 +47,7 @@ const cleanData = (arr) => {
                 temperaments: temperamentArray,
                 life_span: el.life_span,
                 image: el.image.url,
+                created : false
             }
         ) 
         
