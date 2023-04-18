@@ -8,6 +8,7 @@ import {
   FilterByTemperament,
   OrderByName,
   OrderByWeight,
+  filterBySource
 } from "../../redux/actions";
 import Card from "../Card/Card";
 import Paginate from "../Paginate/Paginate";
@@ -26,8 +27,7 @@ function Home() {
   const firstIndex = lastIndex - dogsPerPage;
   const currentDogs = allDogs.slice(firstIndex, lastIndex);//elementos a renderizar en la pagina, segun el valor de paginado
 
-  console.log(currentDogs);
-
+  console.log(allDogs)
   const paginado = (pageNumber) => {
     setCurrentPage(pageNumber)
   };
@@ -55,6 +55,12 @@ function Home() {
   const handleOrderByWeight = (e) => {
     e.preventDefault();
     dispatch(OrderByWeight(e.target.value));
+    setOrden(`Ordenado ${e.target.value}`);
+  };
+
+  const handleOrderBySource = (e) => {
+    e.preventDefault();
+    dispatch(filterBySource(e.target.value));
     setOrden(`Ordenado ${e.target.value}`);
   };
 
@@ -98,6 +104,14 @@ function Home() {
                   }
               </select>
 
+              <select onChange={handleOrderBySource}>
+                <option disabled selected defaultValue>
+                  Filter by source
+                </option>
+                <option value="Todos">All</option>
+                <option value="api">Api</option>
+                <option value="db">DB</option>
+              </select>
             </div>
             
           </div>

@@ -14,15 +14,47 @@ const getDogsById = async (id, source) => {
             temperament :dog.temperament.split(','),
             image: `https://cdn2.thedogapi.com/images/${dog.reference_image_id}.jpg`
         }
-
+        console.log(orderDog);
         return orderDog
     } else {
-        return await Dog.findByPk(id)
+        const dog = await Dog.findByPk(id,{
+            include: [
+                {
+                    model: Temperament,
+                    attributes: ['name'], 
+                    through: {
+                        attributes: [],
+                    },
+                }
+            ]
+        })
+
+        let stringHeight = dog.height.join(' - ')
+        let stringWeight = dog.weight.join(' - ')
+        let temperamentArray = [];
+        if (dog.temperaments) {
+            let temperaments = dog.temperaments
+            for (j of temperaments){
+                temperamentArray.push(j.name)
+            }
+        };
+
+        const orderDog = {
+            id: dog.id,
+            name: dog.name,
+            life_span: dog.life_span,
+            height : stringHeight,
+            weight : stringWeight,
+            temperament : temperamentArray,
+            image: dog.image
+        }
+        console.log(orderDog)
+        return orderDog
     }
 }
 
-const cleanData = (arr) => {
-    dogs = [];
+const cleanApiData = (arr) => {
+    dogsApi = [];
      arr.map((el) => {
         let temperamentArray = [];
         if (el.temperament) {
@@ -38,7 +70,7 @@ const cleanData = (arr) => {
         if (el.weight.metric) {
             weightArray = el.weight.metric.split(" - ");
         };
-        dogs.push(
+        dogsApi.push(
             {
                 id: el.id,
                 name: el.name,
@@ -52,7 +84,43 @@ const cleanData = (arr) => {
         ) 
         
     });
-    return dogs
+    return dogsApi
+};
+
+const cleanDbData = (arr) => {
+    let dogsDb = [];
+     arr.map((el) => {
+        let temperamentArray = [];
+        if (el.temperaments) {
+            let temperaments = el.temperaments
+            for (j of temperaments){
+                temperamentArray.push(j.name)
+            }
+        };
+        let heightArray = [];
+        if (el.height) {
+            heightArray = el.height;
+        };
+    
+        let weightArray = [];
+        if (el.weight) {
+            weightArray = el.weight;
+        };
+        dogsDb.push(
+            {
+                id: el.id,
+                name: el.name,
+                height: heightArray,
+                weight: weightArray,
+                temperaments: temperamentArray,
+                life_span: el.life_span,
+                image: el.image,
+                created : true
+            }
+        ) 
+        
+    });
+    return dogsDb
 };
 
 const getAllDogs = async () => {
@@ -69,31 +137,42 @@ const getAllDogs = async () => {
     //     e.temperaments
     // })
     const getApiData = (await axios.get('https://api.thedogapi.com/v1/breeds')).data;
-    const mappedApiData = cleanData(getApiData);
-    return [...getDbData,...mappedApiData];
+    const mappedDbData = cleanDbData(getDbData);
+    const mappedApiData = cleanApiData(getApiData);
+    return [...mappedDbData,...mappedApiData];
 };
 
 const searchDogByName = async (name) => {
-    const DbDogs = await Dog.findAll({where:{ name }});
+    const getDbDogs = await Dog.findAll({
+        include: {
+            model: Temperament,
+            attributes: ['name'], 
+            through: {
+                attributes: [],
+            },
+        }
+    });
+    const mappetDbData = cleanDbData(getDbDogs);
+    const dbDogs = mappetDbData.filter(d => d.name.toLowerCase().includes(name.toLowerCase()))
     const getApiData = (await axios.get('https://api.thedogapi.com/v1/breeds')).data;
-    const mappedApiData = cleanData(getApiData);
+    const mappedApiData = cleanApiData(getApiData);
     const ApiDogs = mappedApiData.filter(d => d.name.toLowerCase().includes(name.toLowerCase()));
-    return [...DbDogs,...ApiDogs];
+    return [...dbDogs,...ApiDogs];
 };
 
 const createDog = async (name, min_height, max_height,
     min_weight, max_weight, life_span, temperaments, image) => {
 
-        const fixedHeight = [];
+        let fixedHeight = [];
         const minHeight = min_height;
         const maxHeight = max_height;
-        fixedHeight.push(minHeight, maxHeight);
+        fixedHeight.push(minHeight,maxHeight);
     
-        const fixedWeight = [];
+        let fixedWeight = [];
         const minWeight = min_weight;
         const maxWeight = max_weight;
-        fixedWeight.push(minWeight, maxWeight);
-    
+        fixedWeight.push(minWeight,maxWeight);
+        
         let newDog = await Dog.create({
         name,
         height: fixedHeight,
@@ -107,7 +186,6 @@ const createDog = async (name, min_height, max_height,
         })
     
         newDog.addTemperament(associatedTemp);
-    
         return newDog;
 
 }

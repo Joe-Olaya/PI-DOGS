@@ -24,7 +24,7 @@ module.exports = (sequelize) => {
       type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: false
     },
-    life_years:{
+    life_span:{
       type: DataTypes.STRING,
       allowNull: true
     },

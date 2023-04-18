@@ -1,5 +1,12 @@
 import axios from "axios";
 
+export function filterBySource(payload){
+    return {
+        type: "FILTER_BY_SOURCE",
+        payload
+    }
+}
+
 export function getAllDogs() {
     return async function (dispatch) {
         try {

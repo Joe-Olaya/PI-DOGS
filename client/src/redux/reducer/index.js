@@ -21,6 +21,22 @@ const rootReducer = (state = intialState, action) => {
         ...state,
         details:[]
       };
+    case "FILTER_BY_SOURCE":
+      const source = action.payload;
+      if(source === "Todos"){
+        return {
+          ...state,
+          dogs : state.allDogs
+        }
+      }
+      var filteredDogsBySource = source === "api" 
+      ? state.allDogs.filter(e => e.created === false)
+      : state.allDogs.filter(e => e.created === true);
+
+      return {
+        ...state,
+        dogs:filteredDogsBySource
+      }
     case "GET_ALL_DOGS":
       action.payload.forEach(element => {
         if (!element.temperaments[0]) {

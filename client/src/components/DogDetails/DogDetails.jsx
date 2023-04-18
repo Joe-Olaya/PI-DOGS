@@ -16,7 +16,7 @@ export default function DogDetails() {
     }, [dispatch, id]);
     
     const details = useSelector((state) => state.details)
-    console.log(details);
+    // console.log(details);
 
     let nameDog, imageDog, temperamentDog, heightDog, weightDog, lifeSpanDog;
     
